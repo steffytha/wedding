@@ -140,18 +140,46 @@
 
   /* ===================== COVER ===================== */
   .cover{
+    /* the cover is its own small design system: warm ivory stationery,
+       antique gold, deep plum ink. Scoped so the site proper is unaffected */
+    --c-bg:#F8F4F0;
+    --c-bg-hi:#FDFBF8;
+    --c-gold:#B79A62;
+    --c-gold-light:#D8C7A8;
+    --c-ink:#342936;
+    --c-rose:#B96B82;
     position:fixed;inset:0;z-index:100;display:flex;
     cursor:pointer;background:transparent;
     border:0;padding:0;margin:0;width:100%;
     font:inherit;color:inherit;text-align:inherit;
     -webkit-tap-highlight-color:transparent;
   }
+  /* the same stationery at night: warm near-black stock, the gold kept */
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .cover{
+    --c-bg:#1B1520;
+    --c-bg-hi:#241C2B;
+    --c-gold:#C6AC78;
+    --c-gold-light:#6C5C41;
+    --c-ink:#EFE4EA;
+    --c-rose:#D08DA1;
+    }
+  }
+  :root[data-theme="dark"] .cover{
+    --c-bg:#1B1520;
+    --c-bg-hi:#241C2B;
+    --c-gold:#C6AC78;
+    --c-gold-light:#6C5C41;
+    --c-ink:#EFE4EA;
+    --c-rose:#D08DA1;
+  }
+
   .cover-half{
     position:relative;width:50%;height:100%;overflow:hidden;
     background:
-      radial-gradient(70% 50% at 50% 8%,var(--mist-a),transparent 72%),
-      radial-gradient(80% 46% at 50% 96%,var(--mist-b),transparent 74%),
-      var(--ground);
+      radial-gradient(88% 58% at 50% 0%,var(--c-bg-hi),transparent 72%),
+      var(--c-bg);
+    color:var(--c-ink);
     transition:transform .38s cubic-bezier(.4,0,.2,1);
     will-change:transform;
   }
@@ -163,15 +191,19 @@
   .cover-half.right .cover-inner{left:-100%}
 
   .cover-frame{
-    position:absolute;inset:clamp(16px,4.5vw,34px);
-    border:1px solid var(--rule);pointer-events:none;border-radius:2px;
+    position:absolute;inset:clamp(18px,5vw,38px);
+    border:1px solid var(--c-gold-light);pointer-events:none;border-radius:3px;
   }
   .cover-frame::before{
-    content:"";position:absolute;inset:7px;border:1px solid var(--rule);opacity:.45;border-radius:1px;
+    content:"";position:absolute;inset:13px;border:1px solid var(--c-gold-light);
+    opacity:.5;border-radius:2px;
   }
-  .cover-corner{position:absolute;width:clamp(62px,17vw,104px);height:auto;color:var(--sage);opacity:.85}
-  .cover-corner.tl{top:clamp(20px,5vw,40px);left:clamp(20px,5vw,40px)}
-  .cover-corner.br{bottom:clamp(20px,5vw,40px);right:clamp(20px,5vw,40px);transform:rotate(180deg)}
+  .cover-corner{
+    position:absolute;width:clamp(50px,13vw,78px);height:auto;
+    color:var(--c-gold);opacity:.42;
+  }
+  .cover-corner.tl{top:clamp(26px,6.4vw,52px);left:clamp(26px,6.4vw,52px)}
+  .cover-corner.br{bottom:clamp(26px,6.4vw,52px);right:clamp(26px,6.4vw,52px);transform:rotate(180deg)}
 
   /* the rings garland, shared by both halves of the cover so the image
      data is declared once rather than inlined twice */
@@ -195,31 +227,36 @@
   }
   .cover-mono{
     font-family:"Cormorant Garamond",serif;font-weight:300;
-    font-size:clamp(3.4rem,17vw,6.4rem);line-height:1;letter-spacing:0.03em;
+    font-size:clamp(3.2rem,15.5vw,6rem);line-height:1;letter-spacing:0.06em;
+    color:var(--c-ink);
   }
+  /* the "and" is the same face in italic, set small against the capitals */
   .cover-mono em{
-    font-family:"Pinyon Script","Cormorant Garamond",cursive;font-style:normal;
-    color:var(--accent);font-size:1.02em;padding:0 .04em;
+    font-family:inherit;font-style:italic;font-weight:300;
+    font-size:.26em;letter-spacing:.1em;color:var(--c-rose);
+    padding:0 .5em;vertical-align:.5em;
   }
   .cover-date{
-    font-size:0.72rem;letter-spacing:0.34em;text-transform:uppercase;
-    color:var(--ink-soft);margin:0;
+    font-size:0.68rem;letter-spacing:0.42em;text-transform:uppercase;
+    color:var(--c-ink);opacity:.6;margin:0;text-indent:0.42em;
   }
   .cover-names{
-    font-family:"Cormorant Garamond",serif;font-size:1.3rem;font-weight:300;
-    color:var(--ink-soft);margin:0;letter-spacing:.05em;white-space:nowrap;
+    font-family:"Cormorant Garamond",serif;font-size:1.28rem;font-weight:300;
+    color:var(--c-ink);margin:0;letter-spacing:.13em;white-space:nowrap;
+    opacity:.88;
   }
-  .cover-names i{font-family:"Pinyon Script","Cormorant Garamond",cursive;font-style:normal;color:var(--accent);font-size:1.62em;vertical-align:-.08em}
-  .cover-rule{display:flex;align-items:center;gap:.85rem;width:min(230px,58%);color:var(--gilt)}
-  .cover-rule::before,.cover-rule::after{content:"";height:1px;flex:1;background:var(--rule)}
+  .cover-names i{font-style:italic;color:var(--c-rose);font-size:.94em;letter-spacing:.06em}
+  .cover-rule{display:flex;align-items:center;gap:1rem;width:min(196px,52%)}
+  .cover-rule::before,.cover-rule::after{content:"";height:1px;flex:1;background:var(--c-gold-light)}
+  .cover-lozenge{width:4.5px;height:4.5px;transform:rotate(45deg);background:var(--c-gold);opacity:.85}
   .tap-hint{
     position:absolute;bottom:clamp(52px,11vh,92px);left:0;right:0;
-    text-align:center;font-size:0.63rem;letter-spacing:0.3em;
-    text-transform:uppercase;color:var(--gilt);
+    text-align:center;font-size:0.58rem;letter-spacing:0.46em;
+    text-transform:uppercase;color:var(--c-gold);opacity:.75;text-indent:0.46em;
   }
   .tap-hint::after{
-    content:"";display:block;width:1px;height:24px;margin:.7rem auto 0;
-    background:linear-gradient(var(--gilt),transparent);
+    content:"";display:block;width:1px;height:22px;margin:.75rem auto 0;
+    background:linear-gradient(var(--c-gold),transparent);
     animation:breathe 2.6s ease-in-out infinite;
   }
   @keyframes breathe{0%,100%{opacity:.25;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
@@ -648,15 +685,14 @@
       </g>
     </g>
 
-    <!-- corner spray for the invitation cover -->
-    <g id="d-corner">
-      <g style="--p1:var(--sage)">
-        <use href="#d-sprig" transform="translate(2 36) rotate(-38)"/>
-        <use href="#d-sprig" transform="translate(6 30) rotate(6) scale(.8)"/>
-      </g>
-      <use href="#d-bloom" transform="translate(30 30) scale(.72)" style="--p1:var(--blush);--p2:var(--blush-deep);--p3:var(--gilt)"/>
-      <use href="#d-bud" transform="translate(62 20) scale(.62)" style="--p1:var(--blush-deep);--p3:var(--gilt)"/>
-      <use href="#d-bud" transform="translate(22 62) scale(.5)" style="--p1:var(--blush-deep);--p3:var(--gilt)"/>
+    <!-- engraved corner accent: one thin stem, four eucalyptus leaves,
+         drawn in outline only so it matches the ring illustration -->
+    <g id="d-corner" fill="none" stroke="currentColor" stroke-width="0.85" stroke-linecap="round">
+      <path d="M5 5C20 17 34 33 45 53"/>
+      <ellipse cx="16.5" cy="11" rx="7" ry="3.2" transform="rotate(30 16.5 11)"/>
+      <ellipse cx="11" cy="20.5" rx="3.2" ry="7" transform="rotate(30 11 20.5)"/>
+      <ellipse cx="29.5" cy="27" rx="6.4" ry="3" transform="rotate(43 29.5 27)"/>
+      <ellipse cx="24" cy="36" rx="3" ry="6.4" transform="rotate(43 24 36)"/>
     </g>
   </defs>
 </svg>
@@ -668,10 +704,8 @@
     <svg class="cover-corner tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <svg class="cover-corner br" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <span class="cover-rings" aria-hidden="true"></span>
-    <span class="cover-mono">S<em>&amp;</em>G</span>
-    <span class="cover-rule">
-      <svg viewBox="0 0 60 24" width="60" height="24" aria-hidden="true" style="--p1:currentColor"><use href="#d-sprig"/></svg>
-    </span>
+    <span class="cover-mono">S<em>and</em>G</span>
+    <span class="cover-rule"><span class="cover-lozenge"></span></span>
     <span class="cover-names">Steffy <i>and</i> Gaurish</span>
     <span class="cover-date">21 &middot; 11 &middot; 2026</span>
   </span></span>
@@ -680,10 +714,8 @@
     <svg class="cover-corner tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <svg class="cover-corner br" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <span class="cover-rings" aria-hidden="true"></span>
-    <span class="cover-mono">S<em>&amp;</em>G</span>
-    <span class="cover-rule">
-      <svg viewBox="0 0 60 24" width="60" height="24" aria-hidden="true" style="--p1:currentColor"><use href="#d-sprig"/></svg>
-    </span>
+    <span class="cover-mono">S<em>and</em>G</span>
+    <span class="cover-rule"><span class="cover-lozenge"></span></span>
     <span class="cover-names">Steffy <i>and</i> Gaurish</span>
     <span class="cover-date">21 &middot; 11 &middot; 2026</span>
   </span></span>
