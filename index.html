@@ -242,7 +242,24 @@
 
   /* ===================== HERO ===================== */
   .hero{text-align:center;padding:clamp(2.5rem,10vw,4.25rem) 1.15rem clamp(2.5rem,8vw,4rem)}
-  .hero-plate{width:min(430px,92%);height:auto;margin:0 auto;display:block}
+  /* the watercolour is painted on white paper; multiply lets that white
+     dissolve into the page instead of sitting on it as a box */
+  .hero-plate{
+    width:min(430px,92%);height:auto;margin:0 auto;display:block;
+    mix-blend-mode:multiply;
+  }
+  /* on a dark ground multiply would crush it to near-black, so mount it
+     on paper instead and let the blend happen against that */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .hero-plate{
+      background:#F7F2F5;padding:1.5%;border-radius:6px;
+      box-shadow:0 0 0 1px var(--rule),0 20px 44px -26px rgba(0,0,0,.75);
+    }
+  }
+  :root[data-theme="dark"] .hero-plate{
+    background:#F7F2F5;padding:1.5%;border-radius:6px;
+    box-shadow:0 0 0 1px var(--rule),0 20px 44px -26px rgba(0,0,0,.75);
+  }
   .hero .names{font-size:clamp(2.7rem,12vw,5.25rem);letter-spacing:.01em;margin:.9rem 0 .6rem}
   .hero .amp{
     font-family:"Italianno",cursive;color:var(--accent);
@@ -576,49 +593,8 @@
 <header class="hero" id="home">
   <p class="eyebrow">Together with our families</p>
 
-  <svg class="hero-plate" viewBox="0 0 200 138" role="img" aria-label="Two swans facing each other, their necks curving into a heart, on still water">
-    <!-- dawn sky wash -->
-    <ellipse cx="100" cy="52" rx="82" ry="46" style="fill:var(--blush)" opacity=".28"/>
-    <ellipse cx="100" cy="64" rx="96" ry="40" style="fill:var(--water)" opacity=".34"/>
-
-    <!-- reeds -->
-    <g style="stroke:var(--sage-deep);fill:none" stroke-width="1.2" stroke-linecap="round" opacity=".8">
-      <path d="M14 78C13 66 15 56 19 48"/>
-      <path d="M22 78C22 68 25 60 30 54"/>
-      <path d="M186 78C187 66 185 56 181 48"/>
-      <path d="M178 78C178 68 175 60 170 54"/>
-    </g>
-    <g style="fill:var(--sage)" opacity=".85">
-      <ellipse cx="19" cy="45" rx="2.6" ry="7" transform="rotate(-10 19 45)"/>
-      <ellipse cx="181" cy="45" rx="2.6" ry="7" transform="rotate(10 181 45)"/>
-    </g>
-
-    <!-- blossoms arching over the pair -->
-    <use href="#d-bloom" transform="translate(28 12) scale(.5)" style="--p1:var(--blush);--p2:var(--blush-deep);--p3:var(--gilt)"/>
-    <use href="#d-bud"   transform="translate(56 4) scale(.46)"  style="--p1:var(--blush-deep);--p3:var(--gilt)"/>
-    <use href="#d-bud"   transform="translate(128 3) scale(.42)" style="--p1:var(--blush-deep);--p3:var(--gilt)"/>
-    <use href="#d-bloom" transform="translate(150 10) scale(.44)" style="--p1:var(--blush);--p2:var(--blush-deep);--p3:var(--gilt)"/>
-
-    <!-- reflection -->
-    <g mask="url(#m-reflect)">
-      <use href="#d-swanpair" transform="translate(0 152) scale(1 -1)" opacity=".5"/>
-    </g>
-
-    <!-- the swans -->
-    <use href="#d-swanpair"/>
-
-    <!-- water line and ripples -->
-    <path class="ripple" d="M16 80C60 73 140 73 184 80" fill="none" style="stroke:var(--water-deep)" stroke-width="1.2" opacity=".7"/>
-    <path class="ripple" d="M34 90C72 85 128 85 166 90" fill="none" style="stroke:var(--water-deep)" stroke-width="1" opacity=".5"/>
-    <path class="ripple" d="M52 99C80 96 120 96 148 99" fill="none" style="stroke:var(--water-deep)" stroke-width=".9" opacity=".38"/>
-
-    <!-- petals resting on the water -->
-    <g style="fill:var(--blush-deep)" opacity=".75">
-      <ellipse cx="44" cy="86" rx="3.4" ry="1.7" transform="rotate(-16 44 86)"/>
-      <ellipse cx="152" cy="93" rx="3" ry="1.5" transform="rotate(14 152 93)"/>
-      <ellipse cx="96" cy="104" rx="2.6" ry="1.3" transform="rotate(-8 96 104)"/>
-    </g>
-  </svg>
+  <img class="hero-plate" src="images/swans.jpg" width="1100" height="1100"
+       alt="Two swans facing each other on still water, their necks curving into a heart, joined by a red ribbon">
 
   <h1 class="names">Steffy<span class="amp">and</span>Gaurish</h1>
   <p class="meta">Saturday &middot; 21 November 2026</p>
