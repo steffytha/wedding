@@ -142,12 +142,11 @@
   .cover{
     /* the cover is its own small design system: warm ivory stationery,
        antique gold, deep plum ink. Scoped so the site proper is unaffected */
-    --c-bg:#F8F4F0;
-    --c-bg-hi:#FDFBF8;
     --c-gold:#B79A62;
     --c-gold-light:#D8C7A8;
     --c-ink:#342936;
     --c-rose:#B96B82;
+    --c-leaf:#C5CFBC;
     position:fixed;inset:0;z-index:100;display:flex;
     cursor:pointer;background:transparent;
     border:0;padding:0;margin:0;width:100%;
@@ -157,28 +156,27 @@
   /* the same stationery at night: warm near-black stock, the gold kept */
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]) .cover{
-    --c-bg:#1B1520;
-    --c-bg-hi:#241C2B;
     --c-gold:#C6AC78;
     --c-gold-light:#6C5C41;
     --c-ink:#EFE4EA;
     --c-rose:#D08DA1;
+    --c-leaf:#6F7C68;
     }
   }
   :root[data-theme="dark"] .cover{
-    --c-bg:#1B1520;
-    --c-bg-hi:#241C2B;
     --c-gold:#C6AC78;
     --c-gold-light:#6C5C41;
     --c-ink:#EFE4EA;
     --c-rose:#D08DA1;
+    --c-leaf:#6F7C68;
   }
 
   .cover-half{
     position:relative;width:50%;height:100%;overflow:hidden;
     background:
-      radial-gradient(88% 58% at 50% 0%,var(--c-bg-hi),transparent 72%),
-      var(--c-bg);
+      radial-gradient(70% 50% at 50% 8%,var(--mist-a),transparent 72%),
+      radial-gradient(80% 46% at 50% 96%,var(--mist-b),transparent 74%),
+      var(--ground);
     color:var(--c-ink);
     transition:transform .38s cubic-bezier(.4,0,.2,1);
     will-change:transform;
@@ -199,10 +197,12 @@
     opacity:.5;border-radius:2px;
   }
   .cover-corner{
-    position:absolute;width:clamp(50px,13vw,78px);height:auto;
-    color:var(--c-gold);opacity:.42;
+    position:absolute;width:clamp(74px,17vw,118px);height:auto;
+    color:var(--c-gold);opacity:.8;
   }
   .cover-corner.tl{top:clamp(26px,6.4vw,52px);left:clamp(26px,6.4vw,52px)}
+  .cover-corner.tr{top:clamp(26px,6.4vw,52px);right:clamp(26px,6.4vw,52px);transform:scaleX(-1)}
+  .cover-corner.bl{bottom:clamp(26px,6.4vw,52px);left:clamp(26px,6.4vw,52px);transform:scaleY(-1)}
   .cover-corner.br{bottom:clamp(26px,6.4vw,52px);right:clamp(26px,6.4vw,52px);transform:rotate(180deg)}
 
   /* the rings garland, shared by both halves of the cover so the image
@@ -687,12 +687,29 @@
 
     <!-- engraved corner accent: one thin stem, four eucalyptus leaves,
          drawn in outline only so it matches the ring illustration -->
-    <g id="d-corner" fill="none" stroke="currentColor" stroke-width="0.85" stroke-linecap="round">
-      <path d="M5 5C20 17 34 33 45 53"/>
-      <ellipse cx="16.5" cy="11" rx="7" ry="3.2" transform="rotate(30 16.5 11)"/>
-      <ellipse cx="11" cy="20.5" rx="3.2" ry="7" transform="rotate(30 11 20.5)"/>
-      <ellipse cx="29.5" cy="27" rx="6.4" ry="3" transform="rotate(43 29.5 27)"/>
-      <ellipse cx="24" cy="36" rx="3" ry="6.4" transform="rotate(43 24 36)"/>
+    <g id="d-corner">
+      <g fill="none" stroke="currentColor" stroke-width="0.75" stroke-linecap="round">
+        <path d="M4 6C22 10 40 18 58 30"/>
+        <path d="M6 4C10 22 18 40 30 58"/>
+        <path d="M5 5C18 16 30 30 40 46"/>
+      </g>
+      <g fill="var(--c-leaf)" stroke="currentColor" stroke-width="0.5">
+        <ellipse cx="20" cy="9" rx="7.6" ry="4.2" transform="rotate(18 20 9)"/>
+        <ellipse cx="35" cy="15" rx="7" ry="3.9" transform="rotate(26 35 15)"/>
+        <ellipse cx="50" cy="24" rx="6.2" ry="3.5" transform="rotate(34 50 24)"/>
+        <ellipse cx="9" cy="20" rx="4.2" ry="7.6" transform="rotate(18 9 20)"/>
+        <ellipse cx="15" cy="35" rx="3.9" ry="7" transform="rotate(26 15 35)"/>
+        <ellipse cx="24" cy="50" rx="3.5" ry="6.2" transform="rotate(34 24 50)"/>
+        <ellipse cx="29" cy="29" rx="6.4" ry="3.6" transform="rotate(46 29 29)"/>
+      </g>
+      <g fill="none" stroke="currentColor" stroke-width="0.55" stroke-linecap="round">
+        <path d="M39 8C45 6 51 5.6 57 7"/>
+        <path d="M8 39C6 45 5.6 51 7 57"/>
+      </g>
+      <g fill="currentColor" opacity=".75">
+        <circle cx="44.5" cy="5.4" r="1.5"/><circle cx="50.5" cy="4.8" r="1.35"/><circle cx="56.5" cy="6.2" r="1.15"/>
+        <circle cx="5.4" cy="44.5" r="1.5"/><circle cx="4.8" cy="50.5" r="1.35"/><circle cx="6.2" cy="56.5" r="1.15"/>
+      </g>
     </g>
   </defs>
 </svg>
@@ -702,6 +719,8 @@
   <span class="cover-half left"><span class="cover-inner">
     <span class="cover-frame"></span>
     <svg class="cover-corner tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
+    <svg class="cover-corner tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
+    <svg class="cover-corner bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <svg class="cover-corner br" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <span class="cover-rings" aria-hidden="true"></span>
     <span class="cover-mono">S<em>and</em>G</span>
@@ -712,6 +731,8 @@
   <span class="cover-half right"><span class="cover-inner">
     <span class="cover-frame"></span>
     <svg class="cover-corner tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
+    <svg class="cover-corner tr" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
+    <svg class="cover-corner bl" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <svg class="cover-corner br" viewBox="0 0 100 100" aria-hidden="true"><use href="#d-corner"/></svg>
     <span class="cover-rings" aria-hidden="true"></span>
     <span class="cover-mono">S<em>and</em>G</span>
