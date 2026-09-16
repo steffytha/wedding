@@ -343,6 +343,21 @@
   .sched .what{font-weight:500}
   .sched .note{display:block;color:var(--ink-soft);font-weight:400;font-size:.94rem;line-height:1.6}
 
+  /* ===================== MINI LIST ===================== */
+  /* short lists that sit under a paragraph: a name on the left and an
+     optional aside (a drive time) on the right */
+  .mini{list-style:none;margin:.7rem 0 0;padding:0}
+  .mini li{
+    display:grid;grid-template-columns:1fr auto;gap:.2rem 1rem;align-items:baseline;
+    padding:.65rem 0;border-bottom:1px solid var(--rule);
+  }
+  .mini li:last-child{border-bottom:0}
+  .mini .aside{font-size:.82rem;color:var(--ink-soft);white-space:nowrap}
+  .mini .label{
+    display:block;font-weight:500;font-size:.63rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gilt);margin-bottom:.1rem;
+  }
+
   /* ===================== GALLERY ===================== */
   .gallery{
     display:flex;gap:.85rem;overflow-x:auto;
@@ -756,7 +771,7 @@
       <dt>Venue</dt><dd>Peninsula Prime, Jetton Village<br>19918 N Cove Rd, Cornelius, NC 28031 &middot; <a href="https://www.google.com/maps/search/?api=1&amp;query=Peninsula+Prime+19918+N+Cove+Rd+Cornelius+NC+28031" target="_blank" rel="noopener">Open in Maps &rarr;</a></dd>
       <dt>Format</dt><dd>Ceremony, drinks, and a seated dinner &mdash; all in one place. Dancing from 7:30; plan for the evening to run until roughly <span class="ph">[11:00 pm]</span>.</dd>
       <dt>Dress code</dt><dd>We&rsquo;d love to see our family and friends dress up with us! Cocktail or South Asian festive attire is welcomed.</dd>
-      <dt>Getting there</dt><dd><span class="ph">[Parking on site / nearest station / shuttle from the hotel at 3:00 pm.]</span></dd>
+      <dt>Getting there</dt><dd>Charlotte Douglas (CLT) is about 25&ndash;30 minutes by car, and rideshares are easy across the area. See <a href="#travel">Travel &amp; stay</a> for hotels nearby.</dd>
       <dt>Children</dt><dd><span class="ph">[Adults-only evening / children welcome.]</span></dd>
     </dl>
   </div>
@@ -787,10 +802,20 @@
       <h2>Travel &amp; stay</h2>
     </div>
     <div class="stack">
-      <p><strong>Getting here.</strong> <span class="ph">[Nearest airport and drive time. Whether you recommend renting a car or relying on taxis.]</span></p>
-      <p><strong>Where to stay.</strong> We&rsquo;ve held a small block of rooms at <span class="ph">[Hotel name]</span> under &ldquo;<span class="ph">[Steffy &amp; Gaurish]</span>&rdquo;. Book by <span class="ph">[date]</span> for the group rate: <a href="#" class="ph">[booking link]</a>.</p>
-      <p><strong>Getting around.</strong> <span class="ph">[Shuttle details, or a note that the venue is a 10-minute taxi from the hotel.]</span></p>
-      <p><strong>Make a weekend of it.</strong> <span class="ph">[Two or three things you love nearby &mdash; a coffee spot, a walk, a Sunday breakfast where guests can find you the morning after.]</span></p>
+      <p><strong>Getting here.</strong> Charlotte Douglas International Airport (CLT) is about 25&ndash;30 minutes away by car. We&rsquo;d suggest either renting a car or using Uber or Lyft &mdash; rideshares are easy to find at the airport and right across the Charlotte area, though a car of your own is worth it if you&rsquo;d like to explore Lake Norman or Charlotte while you&rsquo;re here.</p>
+      <p><strong>Where to stay.</strong> A few places close to the venue:</p>
+      <ul class="mini">
+        <li><span>Homewood Suites by Hilton Davidson</span><span class="aside">about 8 minutes</span></li>
+        <li><span>Aloft Charlotte Lake Norman</span><span class="aside">about 10 minutes</span></li>
+        <li><span>Courtyard by Marriott Charlotte Lake Norman</span><span class="aside">about 10 minutes</span></li>
+      </ul>
+      <p><strong>Getting around.</strong> Peninsula Prime is roughly 8&ndash;10 minutes by taxi or rideshare from most of the Cornelius and Davidson hotels. Uber and Lyft are widely available in the area, so getting to and from the celebration should be straightforward.</p>
+      <p><strong>Make a weekend of it.</strong> If you&rsquo;re staying a little longer, a few of our local favourites:</p>
+      <ul class="mini">
+        <li><span><span class="label">Morning coffee</span>Summit Coffee in downtown Davidson &mdash; good local coffee and an unhurried place to sit.</span></li>
+        <li><span><span class="label">A scenic walk</span>Jetton Park in Cornelius, for lakefront trails and views out over Lake Norman.</span></li>
+        <li><span><span class="label">Sunday breakfast</span>Toast Cafe in Davidson or Famous Toastery in Cornelius, for a proper classic breakfast.</span></li>
+      </ul>
     </div>
   </div>
 </section>
