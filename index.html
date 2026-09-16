@@ -248,7 +248,24 @@
 
   /* ===================== HERO ===================== */
   .hero{text-align:center;padding:clamp(2.5rem,10vw,4.25rem) 1.15rem clamp(2.5rem,8vw,4rem)}
-  .hero-plate{width:min(360px,86%);height:auto;margin:0 auto;display:block}
+  /* the watercolour is painted on white paper; multiply dissolves that
+     white into the page instead of leaving it as a box */
+  .hero-plate{
+    width:min(360px,86%);height:auto;margin:0 auto;display:block;
+    mix-blend-mode:multiply;
+  }
+  /* multiply would crush it to near-black on a dark ground, so mount it
+     on paper there and let the blend happen against that instead */
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .hero-plate{
+      background:#F7F2F5;padding:1.5%;border-radius:6px;
+      box-shadow:0 0 0 1px var(--rule),0 20px 44px -26px rgba(0,0,0,.75);
+    }
+  }
+  :root[data-theme="dark"] .hero-plate{
+    background:#F7F2F5;padding:1.5%;border-radius:6px;
+    box-shadow:0 0 0 1px var(--rule),0 20px 44px -26px rgba(0,0,0,.75);
+  }
   .hero .names{font-size:clamp(2.7rem,12vw,5.25rem);letter-spacing:.01em;margin:.9rem 0 .6rem}
   .hero .amp{
     font-family:"Italianno",cursive;color:var(--accent);
@@ -649,27 +666,8 @@
 <header class="hero" id="home">
   <p class="eyebrow">Together with our families</p>
 
-  <svg class="hero-plate" viewBox="0 0 200 180" role="img" aria-label="A watercolour painting of two swans on water, their necks curving together into a heart, a coral ribbon tied where they meet and small hearts rising above">
-    <!-- the faintest wash behind, so the birds sit on something -->
-    <g filter="url(#f-bleed)" opacity=".5">
-      <ellipse cx="100" cy="92" rx="86" ry="62" style="fill:var(--blush)" opacity=".22"/>
-    </g>
-
-    <use href="#d-swanscene"/>
-
-    <!-- a single sprig at each side, kept well clear of the birds -->
-    <use href="#d-bloom" transform="translate(2 6) scale(.44)"  style="--p1:var(--blush);--p2:var(--blush-deep);--p3:var(--gilt)" opacity=".85"/>
-    <use href="#d-bud"   transform="translate(176 14) scale(.42)" style="--p1:var(--blush-deep);--p3:var(--gilt)" opacity=".8"/>
-
-    <!-- slow shimmer on the open water -->
-    <g style="stroke:var(--water-deep);fill:none" stroke-linecap="round">
-      <path class="ripple" d="M34 172C70 169 130 169 166 172" stroke-width="1" opacity=".3"/>
-      <path class="ripple" d="M62 178C86 176 114 176 138 178" stroke-width=".9" opacity=".22"/>
-    </g>
-
-    <!-- cold-press paper grain -->
-    <rect x="0" y="0" width="200" height="180" filter="url(#f-grain)" opacity=".08" style="mix-blend-mode:overlay"/>
-  </svg>
+  <img class="hero-plate" src="images/swans.jpg" width="1100" height="1100"
+       alt="A watercolour painting of two swans on still water, their necks curving together into a heart, a red ribbon tied where they meet and small hearts rising above">
 
   <h1 class="names">Steffy<span class="amp">and</span>Gaurish</h1>
   <p class="meta">Saturday &middot; 21 November 2026</p>
