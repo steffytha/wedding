@@ -3,6 +3,7 @@
 The source for our wedding website.
 
 - `index.html` — the whole site (HTML, CSS and JS in one file).
+- `launch-list.html` — the outstanding-work checklist (published separately as its own Artifact).
 
 ## Editing
 
