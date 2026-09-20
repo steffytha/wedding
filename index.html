@@ -466,6 +466,10 @@
   }
   .rsvp-swans{width:120px;height:auto;margin:0 auto .6rem;display:block}
   .rsvp-card p{color:var(--ink-soft);margin:.6rem auto 1.6rem;max-width:34ch}
+  .rsvp-embed{
+    display:block;width:100%;max-width:640px;height:910px;margin:0 auto;
+    border:1px solid var(--rule);border-radius:10px;background:var(--ground);
+  }
   .btn{
     display:inline-block;text-decoration:none;font-weight:500;
     font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
@@ -983,21 +987,15 @@
       <p class="eyebrow">We hope you can make it</p>
       <h2>RSVP</h2>
     </div>
-    <!--
-      To embed your Google Form instead of the button, replace the .rsvp-card
-      below with:
-      <iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true"
-              width="100%" height="1200" frameborder="0"
-              style="border:1px solid var(--rule);border-radius:10px">Loading the RSVP form…</iframe>
-      (Airtable forms embed the same way — use the share/embed URL Airtable gives you.)
-    -->
     <div class="rsvp-card">
       <svg class="rsvp-swans" viewBox="0 0 200 176" aria-hidden="true">
         <use href="#d-swanscene"/>
       </svg>
       <p>Kindly reply by <span class="ph">[Friday, October 2, 2026]</span>. One form per guest &mdash; it takes about a minute.</p>
-      <a class="btn" href="https://forms.gle/your-form-link">Reply to our invitation</a>
-      <p class="hint">Questions the form asks: attending yes/no, meal choice, dietary needs, song request, and whether you need the shuttle.</p>
+      <iframe class="rsvp-embed" title="RSVP form"
+              src="https://docs.google.com/forms/d/e/1FAIpQLSc51I_4nrLnO-jE5SpHRL5jxyUHKNQ36QM7ORwpnZc5m5PNvA/viewform?embedded=true"
+              frameborder="0" marginheight="0" marginwidth="0" loading="lazy">Loading&hellip;</iframe>
+      <p class="hint">Form not loading? <a href="https://docs.google.com/forms/d/e/1FAIpQLSc51I_4nrLnO-jE5SpHRL5jxyUHKNQ36QM7ORwpnZc5m5PNvA/viewform" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
     </div>
   </div>
 </section>
