@@ -459,17 +459,51 @@
   }
 
   /* ===================== RSVP ===================== */
-  .rsvp-card{
-    position:relative;text-align:center;padding:2.5rem 1.4rem 2.25rem;
-    border:1px solid var(--rule);border-radius:10px;background:var(--surface);
-    box-shadow:0 20px 48px -36px color-mix(in srgb,var(--accent) 70%,transparent);
+  /* the form is mounted like a photo (see .plate) rather than set in a card:
+     one border, one ground, and the embed flush inside it. The negative
+     margin is the .gallery bleed, so the frame reaches for the screen edges
+     on a phone and leaves a constant .55rem gutter */
+  .rsvp-frame{
+    position:relative;overflow:hidden;isolation:isolate;
+    margin-inline:calc(-1 * (clamp(1.15rem,5vw,2rem) - .55rem));
+    border:1px solid var(--rule);border-radius:12px;
+    background:#fff;
+    box-shadow:0 22px 52px -36px color-mix(in srgb,var(--accent) 70%,transparent);
   }
-  .rsvp-swans{width:120px;height:auto;margin:0 auto .6rem;display:block}
-  .rsvp-card p{color:var(--ink-soft);margin:.6rem auto 1.6rem;max-width:34ch}
+  /* same undo as .gallery: stop bleeding, centre on its own measure.
+     Must follow the rule above — equal specificity, so source order decides */
+  @media (min-width:760px){
+    .rsvp-frame{margin-inline:auto;max-width:43.75rem}
+  }
+  /* Google renders the form white in either theme, so mount it on the dark
+     ground the way .hero-plate mounts the portrait */
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .rsvp-frame{
+      border-color:color-mix(in srgb,var(--gilt) 42%,transparent);
+      box-shadow:0 28px 60px -32px rgba(0,0,0,.85);
+    }
+  }
+  :root[data-theme="dark"] .rsvp-frame{
+    border-color:color-mix(in srgb,var(--gilt) 42%,transparent);
+    box-shadow:0 28px 60px -32px rgba(0,0,0,.85);
+  }
+  /* sits behind the embed, which paints opaque white over it once loaded */
+  .rsvp-wait{
+    position:absolute;inset:0;margin:0;display:grid;place-content:center;
+    font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#9C8E96;
+  }
+  /* a window onto the form, not a box taller than the screen: the form is
+     multi-page, and its own scroll-to-top on "Next" only reads as movement
+     when the frame fits in view. svh, not dvh — dvh would resize the embed
+     as the URL bar collapses and make Google reflow mid-scroll */
   .rsvp-embed{
-    display:block;width:100%;max-width:640px;height:910px;margin:0 auto;
-    border:1px solid var(--rule);border-radius:10px;background:var(--ground);
+    position:relative;display:block;width:100%;border:0;border-radius:inherit;
+    height:calc(100vh - var(--tabh) - env(safe-area-inset-bottom,0px) - 3rem);
+    height:calc(100svh - var(--tabh) - env(safe-area-inset-bottom,0px) - 3rem);
+    min-height:30rem;max-height:44rem;
   }
+  .rsvp-after{text-align:center;margin-top:1.6rem}
+  .rsvp-swans{width:104px;height:auto;margin:0 auto .35rem;display:block}
   .btn{
     display:inline-block;text-decoration:none;font-weight:500;
     font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
@@ -986,17 +1020,22 @@
       <svg class="bud" viewBox="0 0 48 48" aria-hidden="true" style="--p1:currentColor;--p3:var(--gilt)"><use href="#d-bud"/></svg>
       <p class="eyebrow">We hope you can make it</p>
       <h2>RSVP</h2>
+      <p class="lead">Kindly reply by <span class="ph">[Friday, October 2, 2026]</span>. One form per guest &mdash; it takes about a minute.</p>
     </div>
-    <div class="rsvp-card">
-      <svg class="rsvp-swans" viewBox="0 0 200 176" aria-hidden="true">
-        <use href="#d-swanscene"/>
-      </svg>
-      <p>Kindly reply by <span class="ph">[Friday, October 2, 2026]</span>. One form per guest &mdash; it takes about a minute.</p>
-      <iframe class="rsvp-embed" title="RSVP form"
-              src="https://docs.google.com/forms/d/e/1FAIpQLSc51I_4nrLnO-jE5SpHRL5jxyUHKNQ36QM7ORwpnZc5m5PNvA/viewform?embedded=true"
-              frameborder="0" marginheight="0" marginwidth="0" loading="lazy">Loading&hellip;</iframe>
-      <p class="hint">Form not loading? <a href="https://docs.google.com/forms/d/e/1FAIpQLSc51I_4nrLnO-jE5SpHRL5jxyUHKNQ36QM7ORwpnZc5m5PNvA/viewform" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
-    </div>
+  </div>
+
+  <div class="rsvp-frame">
+    <p class="rsvp-wait">Loading the form&hellip;</p>
+    <iframe class="rsvp-embed" title="RSVP form"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSc51I_4nrLnO-jE5SpHRL5jxyUHKNQ36QM7ORwpnZc5m5PNvA/viewform?embedded=true"
+            frameborder="0" marginheight="0" marginwidth="0"></iframe>
+  </div>
+
+  <div class="wrap rsvp-after">
+    <svg class="rsvp-swans" viewBox="0 0 200 176" aria-hidden="true">
+      <use href="#d-swanscene"/>
+    </svg>
+    <p class="hint">Form not loading? <a href="https://docs.google.com/forms/d/e/1FAIpQLSc51I_4nrLnO-jE5SpHRL5jxyUHKNQ36QM7ORwpnZc5m5PNvA/viewform" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
   </div>
 </section>
 
