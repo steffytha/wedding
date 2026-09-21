@@ -1,6 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- without this, iOS lays the page out at 980px and scales it down, so the
+     desktop breakpoints fire on a phone and every word renders tiny.
+     viewport-fit=cover is what makes env(safe-area-inset-*) resolve to real
+     numbers, which the fixed tab bar and the RSVP frame both rely on -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#F4EEF2" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#191220" media="(prefers-color-scheme:dark)">
+<meta name="description" content="Steffy and Gaurish are getting married on 21 November 2026 at Peninsula Prime, Cornelius, North Carolina.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Pinyon+Script&family=Karla:wght@300;400;500;700&display=swap">
 <title>Steffy &amp; Gaurish</title>
 <style>
+  /* baseline this page used to inherit from its host wrapper */
+  :root{color-scheme:light dark}
+  img{max-width:100%}
+  /* .cover sets display:flex, which beats the UA default for [hidden];
+     without this the opened invitation stays in the layer tree */
+  [hidden]{display:none!important}
+
   :root{
     --ground:#F4EEF2;
     --surface:#FCF8FA;
@@ -589,6 +610,8 @@
 
 <script>document.documentElement.classList.add("cover-active");</script>
 <noscript><style>.cover{display:none}html.cover-active,html.cover-active body{overflow:auto;height:auto}</style></noscript>
+</head>
+<body>
 
 <div class="washes" aria-hidden="true"></div>
 <canvas id="petals" aria-hidden="true"></canvas>
@@ -1334,3 +1357,5 @@
   });
 })();
 </script>
+</body>
+</html>
