@@ -46,7 +46,11 @@
     --mist-b:rgba(199,212,224,0.32);
     --mist-c:rgba(163,180,156,0.20);
     --petal-ink:178,96,118;
-    --tabh:60px;
+    --tab-bg:#332536;
+    --tab-ink:#D9C7D3;
+    --tab-ink-active:#E39BAE;
+    --tab-rule:rgba(203,169,113,0.55);
+    --tabh:64px;
     --maxread:41rem;
     --maxwide:62rem;
   }
@@ -75,6 +79,10 @@
       --mist-b:rgba(44,58,76,0.40);
       --mist-c:rgba(124,143,120,0.16);
       --petal-ink:227,155,174;
+      --tab-bg:#120C18;
+      --tab-ink:#D2BECB;
+      --tab-ink-active:#E39BAE;
+      --tab-rule:rgba(203,169,113,0.42);
     }
   }
   :root[data-theme="dark"]{
@@ -101,6 +109,10 @@
     --mist-b:rgba(44,58,76,0.40);
     --mist-c:rgba(124,143,120,0.16);
     --petal-ink:227,155,174;
+    --tab-bg:#120C18;
+    --tab-ink:#D2BECB;
+    --tab-ink-active:#E39BAE;
+    --tab-rule:rgba(203,169,113,0.42);
   }
 
   *{box-sizing:border-box}
@@ -578,27 +590,28 @@
   .tabs{
     position:fixed;left:0;right:0;bottom:0;z-index:50;
     display:grid;grid-template-columns:repeat(5,1fr);
-    background:color-mix(in srgb,var(--ground) 88%,transparent);
+    background:color-mix(in srgb,var(--tab-bg) 94%,transparent);
     backdrop-filter:blur(16px) saturate(1.2);
     -webkit-backdrop-filter:blur(16px) saturate(1.2);
-    border-top:1px solid var(--rule);
+    border-top:1px solid var(--tab-rule);
+    box-shadow:0 -6px 18px rgba(24,14,26,0.18);
     padding-bottom:env(safe-area-inset-bottom,0px);
   }
   .tab{
     position:relative;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:4px;
     min-height:var(--tabh);padding:.5rem .15rem;
-    text-decoration:none;color:var(--ink-soft);
-    font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+    text-decoration:none;color:var(--tab-ink);
+    font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
     transition:color .22s ease,transform .12s ease;
   }
-  .tab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.35;
+  .tab svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;
     stroke-linecap:round;stroke-linejoin:round}
   .tab:active{transform:scale(.93)}
-  .tab.is-active{color:var(--accent)}
+  .tab.is-active{color:var(--tab-ink-active);font-weight:600}
   .tab.is-active::after{
-    content:"";position:absolute;top:0;left:26%;right:26%;height:2px;
-    background:var(--accent);border-radius:0 0 2px 2px;
+    content:"";position:absolute;top:0;left:22%;right:22%;height:3px;
+    background:var(--tab-ink-active);border-radius:0 0 3px 3px;
   }
 
   /* gentle water motion on the hero plate */
